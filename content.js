@@ -110,19 +110,23 @@
     if (h.includes('claude.ai')) {
       const editor = document.querySelector('div[contenteditable="true"]');
       if (!editor) return null;
-      // Walk up looking for the input card, but cap at 6 levels to avoid grabbing page layout
-      let el = editor;
-      for (let i = 0; i < 6; i++) {
-        if (!el.parentElement || el.parentElement.tagName === 'BODY') break;
+
+      // Use closest() to find the tightest wrapper — fieldset or form.
+      // These are guaranteed to only wrap the input area, not the messages.
+      const wrapper = editor.closest('fieldset') || editor.closest('form');
+      if (wrapper) return wrapper;
+
+      // If no fieldset/form found, walk up just 3 levels looking for a
+      // compact div (< 35% viewport height) — stop early to avoid grabbing
+      // a large ancestor that contains message copy buttons.
+      let el = editor.parentElement;
+      for (let i = 0; i < 3; i++) {
+        if (!el || el.tagName === 'BODY') break;
+        if (el.offsetHeight > 0 && el.offsetHeight < window.innerHeight * 0.35) return el;
         el = el.parentElement;
-        // Stop at fieldset, form, or a div that is reasonably compact
-        const tag = el.tagName;
-        if (tag === 'FIELDSET' || tag === 'FORM') return el;
-        if (tag === 'DIV' && el.offsetHeight < 300 && el.offsetWidth > 300) {
-          // Check it doesn't span the full page height
-          if (el.offsetHeight < window.innerHeight * 0.4) return el;
-        }
       }
+
+      // Last resort: immediate parent of editor only
       return editor.parentElement || editor;
     }
 
@@ -223,14 +227,18 @@
     const active = config.globalEnable && isSiteEnabled();
     const isNew  = isNewChat();
 
-    // When disabled or on new chat: always show, no effects
+    // When disabled or on new-chat page: completely remove all our classes
+    // and CSS vars so the element is 100% back to its original state.
     if (!active || isNew) {
-      container.classList.remove('zenchat-hidden');
-      container.classList.add('zenchat-visible');
+      container.classList.remove('zenchat-hidden', 'zenchat-visible');
+      container.style.removeProperty('--zenchat-hidden-opacity');
       const sb = findScrollButton();
       if (sb) { sb.style.removeProperty('transform'); sb.style.removeProperty('transition'); }
       return;
     }
+
+    // Ensure the opacity var is set (may have been stripped by a disable→enable cycle)
+    container.style.setProperty('--zenchat-hidden-opacity', config.opacity / 100);
 
     const shouldShow = isHovered || isFocused || isNear;
     debugLog(`Visibility: near=${isNear} focused=${isFocused} hovered=${isHovered} → show=${shouldShow}`);

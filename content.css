@@ -1,38 +1,32 @@
 /* CSS injected into Chat pages by ZenChat */
 
 .zenchat-input-container {
-  /* Use hardware accelerated transitions for 60fps performance */
+  /* Smooth hardware-accelerated transitions */
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
               opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
               filter 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
   will-change: transform, opacity, filter;
-  /* Position relative so we can control stacking without affecting layout siblings */
-  position: relative !important;
 }
 
+/* Hidden: slide down, nearly invisible, completely non-interactive */
 .zenchat-input-container.zenchat-hidden {
-  /* Slightly blurred and semi-transparent, pushed down so only a tiny sliver is visible */
   opacity: var(--zenchat-hidden-opacity, 0.05) !important;
   transform: translateY(calc(100% - 12px)) !important;
   filter: blur(1.5px) !important;
-  /* Let clicks pass through to elements behind/above (like copy buttons on messages) */
   pointer-events: none !important;
-  /* Drop below siblings so response action buttons (copy, thumbs up) are not covered */
-  z-index: -1 !important;
 }
 
 .zenchat-input-container.zenchat-hidden * {
   pointer-events: none !important;
 }
 
+/* Visible: fully shown, fully interactive. No z-index so we don't override the
+   site's own stacking and accidentally cover copy/action buttons on messages. */
 .zenchat-input-container.zenchat-visible {
   opacity: 1 !important;
   transform: translateY(0) !important;
   filter: blur(0) !important;
   pointer-events: auto !important;
-  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.15) !important;
-  /* Bring above other elements only when visible and interactive */
-  z-index: 9999 !important;
 }
 
 .zenchat-input-container.zenchat-visible * {
