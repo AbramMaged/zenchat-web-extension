@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZenChat Settings</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1>ZenChat</h1>
+        <p class="subtitle">Auto-Hide Chat Input</p>
+      </div>
+      <label class="toggle">
+        <input type="checkbox" id="global-enable" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-header">Active Sites</div>
+      
+      <div class="row-site">
+        <span class="site-label">ChatGPT</span>
+        <label class="toggle">
+          <input type="checkbox" id="site-chatgpt" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="row-site">
+        <span class="site-label">Claude</span>
+        <label class="toggle">
+          <input type="checkbox" id="site-claude" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="row-site">
+        <span class="site-label">DeepSeek</span>
+        <label class="toggle">
+          <input type="checkbox" id="site-deepseek" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="advanced-header" id="advanced-toggle">
+      <span>Advanced Settings</span>
+      <span class="chevron" id="advanced-chevron">▶</span>
+    </div>
+
+    <div class="section hidden" id="advanced-panel">
+      <div class="row">
+        <div class="label-col">
+          <span class="label-text">Sensitivity Modifier</span>
+          <span class="hint-text">Adjust base reveal distance</span>
+        </div>
+        <div class="input-col">
+          <input type="range" id="sensitivity-modifier" min="-50" max="100" value="0">
+          <span class="val-display" id="val-sensitivity">+0px</span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label-col">
+          <span class="label-text">Hidden Opacity</span>
+          <span class="hint-text">Bar visibility when inactive</span>
+        </div>
+        <div class="input-col">
+          <input type="range" id="opacity" min="0" max="50" value="5">
+          <span class="val-display" id="val-opacity">5%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

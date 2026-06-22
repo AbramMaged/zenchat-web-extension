@@ -1,0 +1,198 @@
+/* Minimal, native-looking options menu */
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 260px;
+  background-color: #161616;
+  color: #d1d1d1;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  user-select: none;
+}
+
+.container {
+  padding: 12px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.header h1 {
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0;
+  color: #ffffff;
+}
+
+.subtitle {
+  font-size: 10px;
+  color: #707070;
+  margin: 1px 0 0 0;
+}
+
+.divider {
+  height: 1px;
+  background-color: #282828;
+  margin: 10px 0;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.section-header {
+  font-size: 9.5px;
+  text-transform: uppercase;
+  color: #707070;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.label-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.label-text {
+  font-weight: 500;
+  color: #c5c5c5;
+}
+
+.hint-text {
+  font-size: 10px;
+  color: #555555;
+}
+
+.input-col {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Minimal Slider */
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 3px;
+  border-radius: 1.5px;
+  background: #2e2e2e;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid #444444;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb:active {
+  background: #007aff;
+  border-color: #007aff;
+}
+
+.val-display {
+  font-size: 10px;
+  color: #707070;
+  min-width: 32px;
+  text-align: right;
+  font-family: monospace;
+}
+
+.row-site {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 0;
+}
+
+.site-label {
+  color: #c5c5c5;
+}
+
+/* Flat Toggle Switch */
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 28px;
+  height: 16px;
+}
+
+.toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #2e2e2e;
+  transition: background-color 0.15s;
+  border-radius: 8px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 12px;
+  width: 12px;
+  left: 2px;
+  bottom: 2px;
+  background-color: #888888;
+  transition: transform 0.15s, background-color 0.15s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #007aff;
+}
+
+input:checked + .slider:before {
+  transform: translateX(12px);
+  background-color: #ffffff;
+}
+
+/* Collapsible Advanced Section */
+.advanced-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-size: 9.5px;
+  text-transform: uppercase;
+  color: #707070;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  padding: 4px 0;
+}
+
+.advanced-header:hover {
+  color: #c5c5c5;
+}
+
+.chevron {
+  font-size: 8px;
+}
+
+.hidden {
+  display: none !important;
+}
