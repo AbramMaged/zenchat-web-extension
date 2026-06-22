@@ -141,4 +141,4 @@ MIT — do whatever you want with it.
 
 ---
 
-*Made because the input bar was taking up too much space while reading.*
+*Made because the input bar was taking up too much space while reading and i can't find anything to do i guess.*
